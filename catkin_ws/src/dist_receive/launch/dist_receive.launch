@@ -1,0 +1,9 @@
+<launch>
+    <arg name="pkg_name" value="dist_receive"/>
+    <arg name="node_name" default="dist_receive_node"/>
+	
+    <node name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen">
+    </node>
+    
+</launch>
+

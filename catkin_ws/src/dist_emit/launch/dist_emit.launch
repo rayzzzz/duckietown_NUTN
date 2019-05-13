@@ -1,0 +1,14 @@
+<launch>
+    <arg name="pkg_name" value="dist_emit"/>
+    <arg name="node_name" default="dist_emit_node"/>
+	
+    <node name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen">
+    </node>
+    <remap from="dist_receive_node/dist" to="dist_emit_node/dist"/>
+    <include file="$(find dist_receive)/launch/dist_receive.launch">
+    </include>
+
+    
+</launch>
+
+

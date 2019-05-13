@@ -1,0 +1,29 @@
+<launch>
+    <arg name="pkg_name" value="emit"/>
+    <arg name="node_name" default="emit_node"/>
+    <arg name="local" default="true"/>	
+    <arg name="base" default="true"/>    
+    <arg name="base2" default="true"/>
+    
+    <group if ="$(arg local)">
+        <include file="$(find duckietown)/launch/joystick.launch">
+            <arg name="veh" default="robot"/>
+        </include>
+    </group>
+
+    <group if="$(arg base)">
+        <node name="$(arg node_name)" pkg="$(arg pkg_name)" type="$(arg node_name).py" output="screen">
+        </node>
+
+        <remap from="receive_node/data" to="emit_node/data"/>    
+        <include file="$(find receive)/launch/receive.launch">
+        </include>
+    </group>
+
+    <group if="$(arg base2)">
+        <include file="$(find dist_emit)/launch/dist_emit.launch">
+        </include>
+    </group>
+
+</launch>
+
